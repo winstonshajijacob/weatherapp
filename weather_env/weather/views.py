@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 import requests
-
+import pandas as pd
 import google_auth_oauthlib.flow
+from googleapiclient.discovery import build
 
 def pull_sheet_data(CREDS,SPREADSHEET_ID,DATA_TO_PULL):
     creds = CREDS
@@ -54,6 +55,7 @@ def sheetSync(request):
     access_type='offline',
     include_granted_scopes='false')
     request.session['state'] = state
+    print(state)
     return redirect(authorization_url) #google oauth popup
 
 
