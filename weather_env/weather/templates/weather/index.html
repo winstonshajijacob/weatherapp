@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,21 +20,30 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-offset-4 is-4"> <div class="control">
-                    <a  href="{% url 'sheet_sync'%}">Sync</a>
-                   
-                    
+                <div class="column is-offset-5 is-1">
+                    <a class="button is-info is-large" href="{% url 'sheet_sync'%}">Authenticate</a>
+
                 </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-3 is-7"> <div class="control">
+                </div>
+                <div > 
                     <form method="POST">
                         <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input class="input" type="text" placeholder="Weather Condition">
-                            </div>
                             <div class="control">
-                                <button class="button is-info" >
-                                    Search Cities
-                                </button>
-                            </div>
+                                <a class="button is-info" href="{% url 'thunderstorm'%}">Thunderstorm</a>
+                                <a class="button is-info" href="{% url 'drizzle'%}">Drizzle</a>
+                                <a class="button is-info" href="{% url 'rain'%}">Rain</a>
+                                <a class="button is-info" href="{% url 'snow'%}">Snow</a>
+                                <a class="button is-info" href="{% url 'atmosphere'%}">Atmosphere</a>
+                                <a class="button is-info" href="{% url 'clear'%}">Clear</a>
+                                <a class="button is-info" href="{% url 'cloud'%}">Clouds</a>
+                        </div>
                         </div>
                     </form>
                 </div>
@@ -44,8 +52,17 @@
     </section>
     <section class="section">
         <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
+            <div class="columns is-multiline">
+                {%if not weather_city%}
+                <h3 class="title">
+                    No Cities with that weather condition
+                </h3>
+                {% endif%}
+                {% for weather in weather_city %}
+                <div class="column is-one-quarter-desktop is-half-tablet">
+                    
+                        
+                    
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
@@ -56,7 +73,7 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <span class="title">{{ weather.city }}</span>
+                                        <span class="title">{{ weather.city }}, {{weather.state}}</span>
                                         <br>
                                         <span class="subtitle">{{ weather.temperature }}° F</span>
                                         <br>
@@ -67,7 +84,11 @@
                             </div>
                         </article>
                     </div>
+                    
+                    
+
                 </div>
+                {% endfor %}
             </div>
         </div>
     </section>

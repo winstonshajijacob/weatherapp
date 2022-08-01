@@ -2,7 +2,7 @@ import weather.views
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-
+#helper view to pass filter parameter
 def cloud(request):
     context = weather.views.sheetPandas('Clouds')
     return render(request, 'weather/index.html', context)
